@@ -122,7 +122,7 @@ if option !=None:
   box3	
   link_game= df_results.loc[df_results['yeni']==box3[0]].copy() 
   link_game = link_game['url'].values.tolist()
-  print(link_game[0])
+  link_game[0]
   quit()	 
   link_game = link_game[0]
   link_game =link_game.replace('/','//')
