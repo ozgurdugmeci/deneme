@@ -157,7 +157,7 @@ if option !=None:
  #df_results.loc[(df_results['home.name']!= option),'yeni2'] = 'at-> ' + df_results['home.name'] + ' ' +df_results['yeni']
  #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
  box3= df_results['yeni'].values.tolist()
-
+with col1:
  box3
 
 #column2 -------------------------------------------------------------------------------------------------------------
