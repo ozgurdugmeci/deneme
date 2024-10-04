@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 
-#------------------------------------------------
+#---------------------------------------------------
 #try: 
 counter=0
 linko='https://www.euroleaguebasketball.net//euroleague/teams//'
