@@ -141,7 +141,7 @@ if option !=None:
   
   for i in xx:
    soup=i
-  
+  #devam
   site_json=json.loads(soup.string)
   site_json.keys()	 
 #column2 -------------------------------------------------------------------------------------------------------------
