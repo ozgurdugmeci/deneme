@@ -158,6 +158,9 @@ if option !=None:
  #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
  box3= df_results['yeni'].values.tolist()
 
+ for mac in box3:
+  mac	
+
 #column2 -------------------------------------------------------------------------------------------------------------
 
 with col2:
@@ -235,4 +238,6 @@ if option !=None:
  #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
  box3= df_results['yeni'].values.tolist()
 
+ for mac in box3:
+  mac	
 
