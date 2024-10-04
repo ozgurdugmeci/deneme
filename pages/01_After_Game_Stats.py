@@ -5,12 +5,6 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 
-
-'When the season starts, page will be activated'
-
-st.stop()
-
-
 #------------------------------------------------
 #try: 
 counter=0
