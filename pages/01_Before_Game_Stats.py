@@ -143,7 +143,8 @@ if option !=None:
    soup=i
   #devam
   site_json=json.loads(soup.string)
-  site_json	 
+  tt= site_json.keys()	
+  tt	 
 #column2 -------------------------------------------------------------------------------------------------------------
 
 with col2:
