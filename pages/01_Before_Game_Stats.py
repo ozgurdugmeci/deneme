@@ -148,7 +148,7 @@ if option !=None:
   xx=xx['pageProps']
   
   xx=xx['mappedData']
-  xx=xx['rawGameInfo']
+  xx=xx['stats']
   tt=xx.keys()
   tt	 
 
