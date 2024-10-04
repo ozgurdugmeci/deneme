@@ -171,7 +171,7 @@ with col2:
 	
 if option !=None:
 
- df_parca= df_clubs.loc[df_clubs['name']==option].copy()
+ df_parca= df_clubs.loc[df_clubs['name']==option2].copy()
  df_parca = df_parca['url'].values.tolist()[0]
  df_parca= df_parca.replace('roster','games')
  df_parca=df_parca.replace('/','//')
