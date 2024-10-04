@@ -119,8 +119,14 @@ if option !=None:
  #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
  box3= df_results['yeni'].values.tolist()
  with col1:
-  box3
-
+  box3	
+  link_game= df_results.loc[df_results['yeni']==box3[0]].copy() 
+  link_game = link_game['url'].values.tolist()
+  print(link_game[0])
+  quit()	 
+  link_game = link_game[0]
+  link_game =link_game.replace('/','//')
+  link_game= 'https://www.euroleaguebasketball.net' + link_game 
 #column2 -------------------------------------------------------------------------------------------------------------
 
 with col2:
