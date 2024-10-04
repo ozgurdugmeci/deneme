@@ -128,7 +128,7 @@ try:
       'Select the player',
       (box3), key='3', index=None)
   
-  if index != None:
+  if option3 != None:
    df_roster_parca= df_roster.loc[df_roster['namo']== option3].copy()
    
    
