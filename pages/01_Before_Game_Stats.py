@@ -147,8 +147,8 @@ if option !=None:
   
   xx=xx['pageProps']
   
-  xx=xx['mappedData']
-  xx=xx['stats']
+  xx=xx['mappedData'].keys()
+  xx
   
 #column2 -------------------------------------------------------------------------------------------------------------
 
