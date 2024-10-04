@@ -143,8 +143,14 @@ if option !=None:
    soup=i
   #devam
   site_json=json.loads(soup.string)
-  tt= site_json.keys()	
+  xx=site_json['props']
+  
+  xx=xx['pageProps']
+  
+  xx=xx['mappedData']
+  tt=xx.keys()
   tt	 
+
 #column2 -------------------------------------------------------------------------------------------------------------
 
 with col2:
