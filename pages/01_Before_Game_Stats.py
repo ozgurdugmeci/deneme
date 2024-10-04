@@ -128,6 +128,22 @@ if option !=None:
   link_game = link_game[0]
   link_game =link_game.replace('/','//')
   link_game= 'https://www.euroleaguebasketball.net' + link_game 
+  page = requests.get(link_game)
+  
+  soup = BeautifulSoup(page.content,"html.parser")
+  
+  xx = soup.find(id="__NEXT_DATA__" )
+  
+  df_home=[]
+  df_home=pd.DataFrame(df_home)
+  df_away=[]
+  df_away=pd.DataFrame(df_away)
+  
+  for i in xx:
+   soup=i
+  
+  site_json=json.loads(soup.string)
+  site_json.keys()	 
 #column2 -------------------------------------------------------------------------------------------------------------
 
 with col2:
