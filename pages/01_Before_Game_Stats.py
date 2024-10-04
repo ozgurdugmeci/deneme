@@ -1,6 +1,6 @@
 
  linko_sezon= 'https://www.euroleaguebasketball.net'+ df_parca + '?season=2023-24'	
- 
+ 'hey'
  
  page = requests.get(linko_sezon)
  
