@@ -33,45 +33,6 @@ df_clubs=pd.json_normalize(kk)
 try:
  euro_img='https://media-cdn.incrowdsports.com/23610a1b-1c2e-4d2a-8fe4-ac2f8e400632.svg'
  st.image(euro_img,width=120)
- 
- #kol1,kol2,kol3,kol4,kol5,kol6,kol7,kol8,kol9 = st.columns(9)
- 
- #tasarım1
- 
- klup_list=df_clubs['crest'].values.tolist()
- #with kol1:
- # st.image(klup_list[0],width=30) 
- # st.image(klup_list[1],width=30)
-   
- #with kol2:
- # st.image(klup_list[3],width=30) 
- # st.image(klup_list[4],width=30)
-  
- #with kol3:
- # st.image(klup_list[6],width=30) 
- # st.image(klup_list[7],width=30)
-  
- #with kol4:
- # st.image(klup_list[9],width=30) 
- # st.image(klup_list[10],width=30)
-  
- #with kol5:
- # st.image(klup_list[12],width=30) 
- # st.image(klup_list[13],width=30)
-  
- #with kol6:
- # st.image(klup_list[15],width=30) 
- # st.image(klup_list[16],width=30)
- 
- #with kol7:
- # st.image(klup_list[2],width=30)
- # st.image(klup_list[5],width=30)
- #with kol8:
- # st.image(klup_list[8],width=30)
- # st.image(klup_list[11],width=30)
- #with kol9:
- # st.image(klup_list[17],width=30)
- # st.image(klup_list[14],width=30)
 except:
  pass 
 #st.title('Productive Five')
@@ -169,7 +130,7 @@ with col2:
 
 
 	
-if option !=None:
+if option2 !=None:
 
  df_parca= df_clubs.loc[df_clubs['name']==option2].copy()
  df_parca = df_parca['url'].values.tolist()[0]
