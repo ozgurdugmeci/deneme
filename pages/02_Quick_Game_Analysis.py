@@ -219,14 +219,14 @@ if option !=None:
   #df_radar.drop(['Team1'], inplace=True, axis=1)
   df_h= df_h[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
   df_h.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
-  df_h['Assists']= df_h['Assists']*10
+  df_h['Assists']= df_h['Assists']*8
   df_h['Rebounds']= df_h['Rebounds']*4
-  df_h['Turnovers']= df_h['Turnovers']*8
+  df_h['Turnovers']= df_h['Turnovers']*6
   df_a= df_a[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
   df_a.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
-  df_a['Assists']= df_a['Assists']*10
+  df_a['Assists']= df_a['Assists']*8
   df_a['Rebounds']= df_a['Rebounds']*4
-  df_a['Turnovers']= df_a['Turnovers']*8
+  df_a['Turnovers']= df_a['Turnovers']*6
 
   
   df_h= df_h.T
