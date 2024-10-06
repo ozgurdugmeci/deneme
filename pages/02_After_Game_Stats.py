@@ -181,6 +181,9 @@ if option !=None:
   
   xx = soup.find(id="__NEXT_DATA__" )
   
+  
+  
+  
   df_home=[]
   df_home=pd.DataFrame(df_home)
   df_away=[]
@@ -191,12 +194,87 @@ if option !=None:
   
   site_json=json.loads(soup.string)
   
+  ##-----RADAR----------------------------------------------
+  secy = st.radio("Choose :",('Home Team','Away Team'))
+  nn=site_json['props']
   
+  nn=nn['pageProps']
+  
+  nn=nn['mappedData']
+  name1=nn['rawGameInfo']['home']['name']
+  name2=nn['rawGameInfo']['away']['name']
+  name11=nn['rawGameInfo']['home']['abbreviatedName']
+  name22=nn['rawGameInfo']['away']['abbreviatedName']
+  df_h=nn['rawGameInfo']['home']['stats']
+  df_a= nn['rawGameInfo']['away']['stats']
+  
+  #['code', 'name', 'abbreviatedName']
+  df_h=pd.json_normalize(df_h)
+  df_h['Team1'] = name1
+  df_h['Team'] = name11
+  df_a['Team1'] = name2
+  df_a['Team'] = name22
+  df_a=pd.json_normalize(df_a)
+  #df_radar= pd.concat([df_h, df_a])
+  #df_radar.drop(['Team1'], inplace=True, axis=1)
+  df_h= df_h[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
+  df_h.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
+  df_h['Assists']= df_h['Assists']*10
+  df_h['Rebounds']= df_h['Rebounds']*4
+  df_h['Turnovers']= df_h['Turnovers']*8
+  df_a= df_a[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
+  df_a.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
+  df_a['Assists']= df_a['Assists']*10
+  df_a['Rebounds']= df_a['Rebounds']*4
+  df_a['Turnovers']= df_a['Turnovers']*8
+
+  
+  df_h= df_h.T
+  df_h.columns=['points']
+  df_h['Team'] = name11
+  df_a= df_a.T
+  df_a.columns=['points']
+  df_a['Team'] = name22
+  df_radar= pd.concat([df_h, df_a])
+  df_radar = df_radar.reset_index()
+  df_radar.columns=['Stats','Values','Teams']
+  
+  st.subheader('Comparison >> '+ name11 + ' vs '+ name22)
+  
+  fig = px.line_polar(df_radar, r="Values",
+                      theta="Stats",
+                      color="Teams",
+                      line_close=True,
+                      color_discrete_sequence=["#00eb93", "#4ed2ff"],
+                      template="plotly_dark" )
+  
+  fig.update_polars(angularaxis_showgrid=False,
+                    radialaxis_gridwidth=0,
+                    gridshape='linear',
+                    bgcolor="#494b5a",
+                    radialaxis_showticklabels=False
+                    )
+  
+  fig.update_layout(paper_bgcolor="#494b5a",legend=dict(font=dict(size=12, color="white")))
+  fig.update_layout(font=dict(size=12, color="white"))
+  config = {'staticPlot': True}
+  
+  st.plotly_chart(fig,config=config)
+
+  
+  
+  
+  #----RADAR ENDS------------------------------------------------
   xx=site_json['props']
   
   xx=xx['pageProps']
   
+  
   xx=xx['mappedData']
+  
+  
+  
+  
   
   #quarter bilgisini al
   #ilk5 bilgilerini al
@@ -1000,7 +1078,7 @@ if option !=None:
     
     
     
-  secy = st.radio("Choose :",('Home Team','Away Team'))
+  #secy = st.radio("Choose :",('Home Team','Away Team'))
   
   
   if secy=='Home Team':
