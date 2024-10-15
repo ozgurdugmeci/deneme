@@ -13,6 +13,11 @@ img1 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/comparison.jpg
 st.image(img1,width=500)
 
 st.subheader('2-Finished Game Analysis & Productive5')
+
+biry= '- Select the team and choose the game. <br> - Analyse radar graph of the two teams.<br>- Overview the stats and the game summary of the productive5.'
+
+st.markdown(biry,unsafe_allow_html=True)
+
 img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/game_analysis1.jpg'
 st.image(img2,width=500)
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/game_analysis2.jpg'
