@@ -26,5 +26,9 @@ st.image(img3,width=500)
 
 
 st.subheader('3-Player Stats')
+biry= "- Select the team and choose the player. <br> Analyse stats of the selected player."
+
+st.markdown(biry,unsafe_allow_html=True)
+
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/player_stats.jpg'
 st.image(img3,width=500)
