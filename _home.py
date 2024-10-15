@@ -1,10 +1,10 @@
 import streamlit as st
 
 st.title('Euroleague 2024-2025 Stats' )
-''
+'You can simply view the rare stats of Euroleage 2024-2025 season. '
 st.subheader('1-Team Comparison')
 #htp0='https://raw.githubusercontent.com/ozgurdugmeci/easy-app/main/media/model4.jpg'
-biry= "- Select the teams you want to compare. <br> Analyse radar graph for an easy comparision.<br Overview the average team stats' tables. "
+biry= "- Select the teams you want to compare. <br> Analyse radar graph for an easy comparision.<br> Overview the average team stats' tables. "
 
 st.markdown(biry,unsafe_allow_html=True)
    
