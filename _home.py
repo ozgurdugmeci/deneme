@@ -12,9 +12,10 @@ st.markdown(biry,unsafe_allow_html=True)
 img1 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/comparison.jpg'
 st.image(img1,width=500)
 
-st.subheader('2-Finished Game Analysis & Productive5')
+st.subheader('2-Finished Game Analysis & Productive5 Players')
 
-biry= "- Select the team and choose the game. <br> Analyse radar graph of the two teams.<br> Overview the stats and the game summary of the productive5."
+biry= "- Select the team and choose the game. <br> Analyse radar graph of the two teams.<br> Overview the stats and the game summary of the Productive5 Players.<br>\
+You can change the Productive5 Players by changing Home/Away button."
 
 st.markdown(biry,unsafe_allow_html=True)
 
