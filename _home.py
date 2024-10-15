@@ -1,2 +1,6 @@
 import streamlit as st
-'Home Page'
+
+
+st.subheader('1-Team Comparison')
+st.subheader('2-Finished Game Analysis')
+st.subheader('3-Player Stats')
