@@ -522,8 +522,8 @@ if option !=None:
  df_radar= pd.concat([df_team1, df_team2])
  df_radar = df_radar.reset_index()
  df_radar.columns=['Stats','Values','Teams']
- with col3:
-  st.subheader('Comparison of '+printox)
+with col3:
+ st.subheader('Comparison of '+printox)
  
 fig = px.line_polar(df_radar, r="Values",
                     theta="Stats",
