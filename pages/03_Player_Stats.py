@@ -8,6 +8,8 @@ import json
 import plotly.express as px
 from streamlit_plotly_events import plotly_events
 
+st.set_page_config(page_title='Comparison', page_icon="⛹🏻‍♀️", layout="wide")
+
 try:
  fig = go.Figure()
  config = {'staticPlot': True}
