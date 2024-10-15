@@ -1,9 +1,12 @@
 import streamlit as st
 
-
+st.title('Euroleaague 2024-2025 Stats' )
 st.subheader('1-Team Comparison')
 #htp0='https://raw.githubusercontent.com/ozgurdugmeci/easy-app/main/media/model4.jpg'
-metin='sdsdssd <br> dfdfdfd'
+biry= '-Select the teams you want to compare. <br> -Analyse radar graph for an easy comparision.<br>- And Take a look at the team average stats. '
+
+st.markdown(biry,unsafe_allow_html=True)
+   
 
 img1 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/comparison.jpg'
 st.image(img1,width=500)
