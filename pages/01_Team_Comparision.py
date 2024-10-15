@@ -279,28 +279,28 @@ box1= df_clubs['name'].values.tolist()
 #col1
 
 with col2:
- option = st.selectbox(
+ optionto = st.selectbox(
   'Select the team',
   (box1), key='2',index=None)
 
 
 	
-if option !=None:
+if optionto !=None:
  
- printo= option + ' seçilen'
+ printo= optionto + ' seçilen'
  #printo
  
- takm2=df_clubs.loc[df_clubs['name']==option].copy() 
+ takm2=df_clubs.loc[df_clubs['name']==optionto].copy() 
  takm2=takm2['tvCode'].values.tolist()[0]
 
  
- resm=df_clubs.loc[df_clubs['name']==option].copy()
+ resm=df_clubs.loc[df_clubs['name']==optionto].copy()
  resm=resm['crest'].values.tolist()
  with col2:
   st.image (resm[0],width=120)
 
  
- df_parca= df_clubs.loc[df_clubs['name']==option].copy()
+ df_parca= df_clubs.loc[df_clubs['name']==optionto].copy()
  df_parca = df_parca['url'].values.tolist()[0]
  df_parca= df_parca.replace('roster','games')
  df_parca=df_parca.replace('/','//')
@@ -424,7 +424,7 @@ if option !=None:
   df_h['Team'] = name11
   df_a['Team1'] = name2
   df_a['Team'] = name22
-  if option == name1:
+  if optionto == name1:
    #'home'
    scorey=raw_game['away.score'].values.tolist()[0]
    df_h['Points-']=scorey
@@ -488,7 +488,7 @@ if option !=None:
   df_team2[df_team2.columns[i]]= df_team2[df_team2.columns[i]]/uzunluk
   df_team2[df_team2.columns[i]]=df_team2[df_team2.columns[i]].round(0)
 
- 
+if option != None and optionto != None :
  df_team1_orj= df_team1.copy()
  df_team2_orj= df_team2.copy()
  
@@ -522,32 +522,32 @@ if option !=None:
  df_radar= pd.concat([df_team1, df_team2])
  df_radar = df_radar.reset_index()
  df_radar.columns=['Stats','Values','Teams']
-with col3:
- st.subheader('Comparison of '+printox)
- 
-fig = px.line_polar(df_radar, r="Values",
+ with col3:
+  st.subheader('Comparison of '+printox)
+
+ fig = px.line_polar(df_radar, r="Values",
                     theta="Stats",
                     color="Teams",
                     line_close=True,
                     color_discrete_sequence=["#00eb93", "#4ed2ff"],
                     template="plotly_dark" )
 
-fig.update_polars(angularaxis_showgrid=False,
+ fig.update_polars(angularaxis_showgrid=False,
                   radialaxis_gridwidth=0,
                   gridshape='linear',
                   bgcolor="#494b5a",
                   radialaxis_showticklabels=False
                   )
 
-fig.update_layout(
+ fig.update_layout(
      paper_bgcolor="#494b5a",
      legend=dict(font=dict(size=12, color="white")),
      font=dict(size=12, color="white"),
      width=560,  # Set the width of the graph
-     height=500  # Set the height of the graph
- )
-config = {'staticPlot': True}
-with  col3:  
- st.plotly_chart(fig,config=config)
+     height=500)  # Set the height of the graph)
+ 
+ with  col3:  
+  config = {'staticPlot': True}
+  st.plotly_chart(fig,config=config)
 
 
