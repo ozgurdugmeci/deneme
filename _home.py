@@ -34,7 +34,23 @@ st.markdown(biry,unsafe_allow_html=True)
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/player_stats.jpg'
 st.image(img3,width=500)
 takip= """
-
+<!-- Default Statcounter code for Euro_stats_home
+https://euroleaguestats.streamlit.app/ -->
+<script type="text/javascript">
+var sc_project=13046765; 
+var sc_invisible=1; 
+var sc_security="2abc5313"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/13046765/0/2abc5313/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
 """
 #st.markdown(takip, unsafe_allow_html=True)  
 components.html(takip,width=200, height=200)  
