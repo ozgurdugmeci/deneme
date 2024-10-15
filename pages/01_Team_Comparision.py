@@ -550,7 +550,7 @@ if option != None and optionto != None :
   config = {'staticPlot': True}
   st.plotly_chart(fig,config=config)
 
-"""
+takip = """
 <!-- Default Statcounter code for Euro_stats_compare
 https://euroleaguestats.streamlit.app/ -->
 <script type="text/javascript">
@@ -568,3 +568,5 @@ src="https://c.statcounter.com/13046770/0/ee0f4109/1/"
 alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->"""
+#st.markdown(takip, unsafe_allow_html=True)  
+components.html(takip,width=200, height=200)  
