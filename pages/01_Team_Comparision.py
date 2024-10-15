@@ -209,6 +209,9 @@ if option !=None:
    df_team1= pd.concat([df_team1, df_h])
    scorea=raw_game['home.score'].values.tolist()[0]
    saha=saha+1
+   if scorea>scorey:
+    home_win=home_win+1
+	  
   else:
    #'away'
    deplasman=deplasman+1
@@ -431,7 +434,7 @@ if optionto !=None:
    df_team2= pd.concat([df_team2, df_h])
    scorea=raw_game['home.score'].values.tolist()[0]
    saha=saha+1
-   if scorea<scorey:
+   if scorea>scorey:
      home_win=home_win+1
 	 
   #df_team1 
