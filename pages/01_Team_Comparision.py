@@ -8,7 +8,7 @@ import plotly.express as px
 import pandas as pd
 
 
-st.set_page_config(page_title='Comparison', page_icon="ℹ️", layout="wide",initial_sidebar_state ='collapsed')
+st.set_page_config(page_title='Comparison', page_icon="🏀", layout="wide",initial_sidebar_state ='collapsed')
 
 
 
