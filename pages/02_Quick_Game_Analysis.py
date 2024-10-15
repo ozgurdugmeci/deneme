@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 import plotly.express as px
-
+st.set_page_config(page_title='Comparison', page_icon="🥇", layout="wide")
 #------------------------------------------------
 #try: 
 counter=0
