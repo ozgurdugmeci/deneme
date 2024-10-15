@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.title('Euroleague 2024-2025 Stats' )
 'You can simply view the rare stats of Euroleage 2024-2025 season. '
