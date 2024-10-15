@@ -33,3 +33,8 @@ st.markdown(biry,unsafe_allow_html=True)
 
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/player_stats.jpg'
 st.image(img3,width=500)
+takip= """
+
+"""
+#st.markdown(takip, unsafe_allow_html=True)  
+components.html(takip,width=200, height=200)  
