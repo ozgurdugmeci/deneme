@@ -1170,21 +1170,21 @@ if option !=None:
    
    
 takip= """
-<!-- Default Statcounter code for euro_stats
+<!-- Default Statcounter code for Euro_stats_productive
 https://euroleaguestats.streamlit.app/ -->
 <script type="text/javascript">
-var sc_project=12825092; 
+var sc_project=13046774; 
 var sc_invisible=1; 
-var sc_security="190e10f1"; 
+var sc_security="f80506ba"; 
 </script>
 <script type="text/javascript"
 src="https://www.statcounter.com/counter/counter.js"
 async></script>
-<noscript><div class="statcounter"><a title="web counter"
-href="https://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="https://c.statcounter.com/12825092/0/190e10f1/1/"
-alt="web counter"
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - Statcounter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13046774/0/f80506ba/1/"
+alt="Web Analytics Made Easy - Statcounter"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
 """
