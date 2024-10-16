@@ -5,7 +5,7 @@ st.title('Euroleague 2024-2025 Stats' )
 'You can simply view the rare stats of Euroleage 2024-2025 season. '
 st.subheader('1-Team Comparison')
 #htp0='https://raw.githubusercontent.com/ozgurdugmeci/easy-app/main/media/model4.jpg'
-biry= "- Select the teams you want to compare. <br> Analyse radar graph for an easy comparision.<br> Overview the average team stats' tables. "
+biry= "- Select the teams you want to compare. <br> Analyse the radar graph for an easy comparision.<br> Overview the average team stats' tables. "
 
 st.markdown(biry,unsafe_allow_html=True)
    
@@ -15,7 +15,7 @@ st.image(img1,width=500)
 
 st.subheader('2-Finished Game Analysis & Productive5 Players')
 
-biry= "- Select the team and choose the game. <br> Analyse radar graph of the two teams.<br> Overview the stats and the game summary of the Productive5 Players.<br>\
+biry= "- Select the team and choose the game. <br> Analyse the radar graph of the two teams.<br> Overview the stats and the game summary of the Productive5 Players.<br>\
 You can change the Productive5 Players by changing Home/Away button."
 
 st.markdown(biry,unsafe_allow_html=True)
@@ -27,7 +27,7 @@ st.image(img3,width=500)
 
 
 st.subheader('3-Player Stats')
-biry= "- Select the team and choose the player. <br> Analyse stats of the selected player."
+biry= "- Select the team and choose the player. <br> Analyse the stats of the selected player."
 
 st.markdown(biry,unsafe_allow_html=True)
 
