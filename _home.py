@@ -26,7 +26,7 @@ img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/game_analysis2
 st.image(img3,width=500)
 st.subheader('3-Substitution Analysis')
 
-biry= "- Select the team and choose the game. <br> Analyse the Substitution & Score Difference Graph.<br> Click on the substitution bars \
+biry= "- Select the team and choose the game. <br> Analyse the Substitution & Score Difference Graph.<br> Click on the bars of the graph \
 to analyse the related 5 on the court.<br>\
 You can change the team by clicking Home/Away button."
 
