@@ -32,9 +32,11 @@ You can change the team by clicking Home/Away button."
 
 st.markdown(biry,unsafe_allow_html=True)
 
-img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph.jpg'
+img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph2.jpg'
 st.image(img2,width=500)
-img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team2.jpg'
+img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph3.jpg'
+st.image(img2,width=500)
+img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team3.jpg'
 st.image(img3,width=500)
 
 st.subheader('4-Player Stats')
