@@ -34,7 +34,7 @@ st.markdown(biry,unsafe_allow_html=True)
 
 img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph.jpg'
 st.image(img2,width=500)
-img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team.jpg'
+img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team2.jpg'
 st.image(img3,width=500)
 
 st.subheader('4-Player Stats')
