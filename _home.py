@@ -34,7 +34,7 @@ st.markdown(biry,unsafe_allow_html=True)
 
 img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph2.jpg'
 st.image(img2,width=500)
-img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph3.jpg'
+img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graphx.jpg'
 st.image(img2,width=500)
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team3.jpg'
 st.image(img3,width=500)
