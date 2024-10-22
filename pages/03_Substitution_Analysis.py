@@ -1094,7 +1094,7 @@ try:
   
   	
 except:
- 'New season has not started yet.'
+ 'Select a team then a game!'
  #'Or check your internet connection and refresh the link.'	
    
    
