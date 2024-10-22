@@ -24,9 +24,20 @@ img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/game_analysis1
 st.image(img2,width=500)
 img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/game_analysis2.jpg'
 st.image(img3,width=500)
+st.subheader('3-Substitution Analysis')
 
+biry= "- Select the team and choose the game. <br> Analyse the Substitution & Score Difference Graph.<br> Click on the substitution bars \
+to analyse the related 5 on the court.<br>\
+You can change the team by clicking Home/Away button."
 
-st.subheader('3-Player Stats')
+st.markdown(biry,unsafe_allow_html=True)
+
+img2 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/graph.jpg'
+st.image(img2,width=500)
+img3 ='https://raw.githubusercontent.com/ozgurdugmeci/deneme/main/team.jpg'
+st.image(img3,width=500)
+
+st.subheader('4-Player Stats')
 biry= "- Select the team and choose the player. <br> Analyse the stats of the selected player."
 
 st.markdown(biry,unsafe_allow_html=True)
