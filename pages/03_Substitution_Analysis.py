@@ -1099,6 +1099,23 @@ except:
    
    
 takip= """
+<!-- Default Statcounter code for Euro_stats_subs
+https://euroleaguestats.streamlit.app/ -->
+<script type="text/javascript">
+var sc_project=13048825; 
+var sc_invisible=1; 
+var sc_security="8b746196"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="free hit
+counter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/13048825/0/8b746196/1/"
+alt="free hit counter"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
 """
 #st.markdown(takip, unsafe_allow_html=True)  
 components.html(takip,width=200, height=200)     
