@@ -3,6 +3,7 @@ import streamlit.components.v1 as components
 
 st.title('Euroleague 2024-2025 Stats' )
 'You can simply view the rare stats of Euroleage 2024-2025 season. '
+'For a better view, open the app on a laptop or a desktop computer.'
 st.subheader('1-Team Comparison')
 #htp0='https://raw.githubusercontent.com/ozgurdugmeci/easy-app/main/media/model4.jpg'
 biry= "- Select the teams you want to compare. <br> Analyse the radar graph for an easy comparision.<br> Overview the average team stats' tables. "
