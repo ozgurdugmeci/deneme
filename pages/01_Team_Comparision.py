@@ -530,10 +530,12 @@ if option != None and optionto != None :
  df_team1['Assists']= df_team1['Assists']*8
  df_team1['Rebounds']= df_team1['Rebounds']*3
  df_team1['Turnovers']= df_team1['Turnovers']*6
-
+ df_team1['Offense Accuracy']= df_team1['Offense Accuracy']*1.5
+	
  df_team2['Assists']= df_team2['Assists']*8
  df_team2['Rebounds']= df_team2['Rebounds']*3
  df_team2['Turnovers']= df_team2['Turnovers']*6
+ df_team2['Offense Accuracy']= df_team2['Offense Accuracy']*1.5	
  df_team1= df_team1.T
  df_team1.columns=['points']
  df_team1['Team'] = takm1
