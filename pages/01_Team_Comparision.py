@@ -74,7 +74,7 @@ if option !=None:
  resm=df_clubs.loc[df_clubs['name']==option].copy()
  resm=resm['crest'].values.tolist()
  with col1:
-  st.image (resm[0],width=120)
+  st.image (resm[0],width=100)
 
  df_parca= df_clubs.loc[df_clubs['name']==option].copy()
  df_parca = df_parca['url'].values.tolist()[0]
@@ -300,7 +300,7 @@ if optionto !=None:
  resm=df_clubs.loc[df_clubs['name']==optionto].copy()
  resm=resm['crest'].values.tolist()
  with col2:
-  st.image (resm[0],width=120)
+  st.image (resm[0],width=100)
 
  
  df_parca= df_clubs.loc[df_clubs['name']==optionto].copy()
