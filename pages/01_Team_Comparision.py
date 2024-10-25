@@ -245,13 +245,13 @@ if option !=None:
  #'No away games.' 
  df_team1['All']='All'
  df_team1= df_team1[['points','Points-','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
- df_team1.columns=['Points','Points-','Assists','Rebounds','Turnovers','TotalAttempt']
+ df_team1.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
  df_team1['Points-']=df_team1['Points-'].astype(float)
  #st.dataframe(df_team1)
 
  df_team1['All'] = 'All'
  
- df_team1 = pd.pivot_table(df_team1, values=['Points','Points-','Assists','Rebounds','Turnovers','TotalAttempt'], index=['All'] ,aggfunc="sum") 
+ df_team1 = pd.pivot_table(df_team1, values=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt'], index=['All'] ,aggfunc="sum") 
  df_team1 = df_team1.reset_index()                #index to columns ------------------  -------------------------------
  df_team1.drop(['All'], inplace=True, axis=1)
  
@@ -474,13 +474,13 @@ if optionto !=None:
  #'No away games.' 
  df_team2['All']='All'
  df_team2= df_team2[['points','Points-','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
- df_team2.columns=['Points','Points-','Assists','Rebounds','Turnovers','TotalAttempt']
+ df_team2.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
  df_team2['Points-']=df_team2['Points-'].astype(float)
  #st.dataframe(df_team2)
 
  df_team2['All'] = 'All'
  
- df_team2 = pd.pivot_table(df_team2, values=['Points','Points-','Assists','Rebounds','Turnovers','TotalAttempt'], index=['All'] ,aggfunc="sum") 
+ df_team2 = pd.pivot_table(df_team2, values=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt'], index=['All'] ,aggfunc="sum") 
  df_team2 = df_team2.reset_index()                #index to columns ----------
  df_team2.drop(['All'], inplace=True, axis=1)
  
@@ -495,8 +495,8 @@ if option != None and optionto != None :
  df_team1_orj= df_team1.copy()
  df_team2_orj= df_team2.copy()
 
- df_team1_orj['Offense Accuracy']=df_team1_orj['Points']/df_team1_orj['TotalAttempt']
- df_team2_orj['Offense Accuracy']=df_team2_orj['Points']/df_team2_orj['TotalAttempt']
+ df_team1_orj['Offense Accuracy']=df_team1_orj['Points']/df_team1_orj['ScoreAttempt']
+ df_team2_orj['Offense Accuracy']=df_team2_orj['Points']/df_team2_orj['ScoreAttempt']
  
  df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy']*100
  df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy']*100
@@ -517,8 +517,8 @@ if option != None and optionto != None :
  with col2:
   st.dataframe(df_team2_orj)
 
- df_team1['Offense Accuracy']=df_team1['Points']/df_team1['TotalAttempt']
- df_team2['Offense Accuracy']=df_team2['Points']/df_team2['TotalAttempt']
+ df_team1['Offense Accuracy']=df_team1['Points']/df_team1['ScoreAttempt']
+ df_team2['Offense Accuracy']=df_team2['Points']/df_team2['ScoreAttempt']
  
  df_team2['Offense Accuracy']= df_team2['Offense Accuracy']*100
  df_team1['Offense Accuracy']= df_team1['Offense Accuracy']*100
