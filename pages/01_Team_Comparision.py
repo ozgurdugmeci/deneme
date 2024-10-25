@@ -502,6 +502,8 @@ if option != None and optionto != None :
  df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy']*100
  df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy'].round(0)
  df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy'].round(0)
+ #df_team2_orj['Offense_Accuracy']= df_team2_orj['Offense Accuracy']*1
+ #df_team1_orj['Offense_Accuracy']= df_team1_orj['Offense Accuracy']*1
 	
  df_team1_orj['Offense Accuracy']= '%'+ df_team1_orj['Offense Accuracy'].astype(str)	
  df_team2_orj['Offense Accuracy']= '%'+df_team2_orj['Offense Accuracy'].astype(str)	
