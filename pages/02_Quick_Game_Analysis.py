@@ -217,17 +217,32 @@ if option !=None:
   df_a=pd.json_normalize(df_a)
   #df_radar= pd.concat([df_h, df_a])
   #df_radar.drop(['Team1'], inplace=True, axis=1)
+
+
+
   df_h= df_h[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
   df_h.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
+  
+  df_h['Offense Accuracy']=df_h['Points']/df_h['ScoreAttempt']
+  df_h['Offense Accuracy']= df_h['Offense Accuracy']*100
+  df_h['Offense Accuracy']= df_h['Offense Accuracy'].round(0)
+  
   df_h['Assists']= df_h['Assists']*8
   df_h['Rebounds']= df_h['Rebounds']*3
   df_h['Turnovers']= df_h['Turnovers']*6
+  df_h['Offense Accuracy']= df_h['Offense Accuracy']*1.5
+
   df_a= df_a[['points','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
   df_a.columns=['Points','Assists','Rebounds','Turnovers','ScoreAttempt']
+  
+  df_a['Offense Accuracy']=df_a['Points']/df_a['ScoreAttempt']
+  df_a['Offense Accuracy']= df_a['Offense Accuracy']*100
+  df_a['Offense Accuracy']= df_a['Offense Accuracy'].round(0)
+
   df_a['Assists']= df_a['Assists']*8
   df_a['Rebounds']= df_a['Rebounds']*3
   df_a['Turnovers']= df_a['Turnovers']*6
-
+  df_a['Offense Accuracy']= df_a['Offense Accuracy']*1.5
   
   df_h= df_h.T
   df_h.columns=['points']
