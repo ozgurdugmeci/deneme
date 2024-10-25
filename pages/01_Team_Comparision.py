@@ -494,7 +494,12 @@ if optionto !=None:
 if option != None and optionto != None :
  df_team1_orj= df_team1.copy()
  df_team2_orj= df_team2.copy()
- 
+
+ df_team1_orj['Offense Accuracy']=df_team1_orj['Points']/df_team1_orj['TotalAttempt']
+ df_team2_orj['Offense Accuracy']=df_team2_orj['Points']/df_team2_orj['TotalAttempt']
+ df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy'].astype(float)
+ df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy'].astype(float)
+	
  df_team1_orj= df_team1_orj.T
  df_team1_orj.columns=['Average']
 
