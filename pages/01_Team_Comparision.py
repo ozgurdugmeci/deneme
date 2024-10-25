@@ -497,8 +497,14 @@ if option != None and optionto != None :
 
  df_team1_orj['Offense Accuracy']=df_team1_orj['Points']/df_team1_orj['TotalAttempt']
  df_team2_orj['Offense Accuracy']=df_team2_orj['Points']/df_team2_orj['TotalAttempt']
- df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy'].astype(float)
- df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy'].astype(float)
+ 
+ df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy']*100
+ df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy']*100
+ df_team2_orj['Offense Accuracy']= df_team2_orj['Offense Accuracy'].round(0)
+ df_team1_orj['Offense Accuracy']= df_team1_orj['Offense Accuracy'].round(0)
+	
+ df_team1_orj['Offense Accuracy']= '%'+ df_team1_orj['Offense Accuracy'].astype(str)	
+ df_team2_orj['Offense Accuracy']= '%'+df_team2_orj['Offense Accuracy'].astype(str)	
 	
  df_team1_orj= df_team1_orj.T
  df_team1_orj.columns=['Average']
