@@ -226,11 +226,11 @@ if option !=None:
  metin2= 'Away Games: '  + str(deplasman)
  metin3= 'Home Wins: ' + str(home_win)
  metin4= 'Away Wins: ' + str(away_win)
+ metin1= metin1 + ' , '+ metin3
+ metin2= metin2 + ' , '+ metin4	
  with col1:
-  metin1
+  metin1  
   metin2
-  metin3
-  metin4
  #if deplasman>0 :   
  #away_win=away_win/uzunluk
  #away_win=round(away_win,2)-------
@@ -453,12 +453,12 @@ if optionto !=None:
  metin2= 'Away Games: '  + str(deplasman)
  metin3= 'Home Wins: ' + str(home_win)
  metin4= 'Away Wins: ' + str(away_win)
+ metin1= metin1 + ' , '+ metin3
+ metin2= metin2 + ' , '+ metin4		
  with col2: 
   metin1
   metin2
-  metin3
-  metin4
-  
+
  #if deplasman>0 :
  #away_win=away_win/uzunluk
  #away_win=round(away_win,2) 
