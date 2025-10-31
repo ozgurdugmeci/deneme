@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.title('Euroleague 2024-2025 Stats' )
+st.title('Euroleague 2025-2026 Stats' )
 'You can simply view the rare stats of Euroleage 2024-2025 season. '
 'For a better view, open the app on a laptop or a desktop computer.'
 st.subheader('1-Team Comparison')
