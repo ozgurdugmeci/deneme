@@ -480,7 +480,7 @@ try:
   #df_hesap['Oran']=df_hesap['Oran'].round(2)
   df_hesap=df_hesap.sort_values(by='PIR_Expected', ascending=False)
   st.dataframe(df_hesap)
-  '%Flop        : Possibility of the player gain less PIR than usual.' 
+  '%Flop        : Possibility of the player critically gains less PIR than usual.' 
   'PIR_Expected : Expected PIR when the player does not flop. '
   'PIR_Flop     : Upper PIR limit when the player flops. '
 except:
