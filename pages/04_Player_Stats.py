@@ -383,7 +383,7 @@ try:
    df_games=pd.concat([df_games, df_games7], axis=1)
    
    df_round=[]
-   for i in range(1,35):
+   for i in range(1,38):
     df_round.append(i)
    
    df_round= pd.DataFrame(df_round) 
