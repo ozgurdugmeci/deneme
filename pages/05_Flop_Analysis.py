@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import json
 
-st.set_page_config(page_title='Player Stats', page_icon="💪", layout="wide")
+st.set_page_config(page_title='Flop Analysis', page_icon="💪", layout="wide")
 
 st.header('Flop Analysis') 
 #-------------------------------------
