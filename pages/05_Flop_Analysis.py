@@ -430,7 +430,7 @@ try:
     df_games_last5=df_games_last5['PIR'].values.tolist()
     cv=sapma/ortalma
     cv=cv*100
-    cv=cd.round(0)
+    cv=cv.round(0)
     if ortalma/sapma<2:
      df_games_est=df_games.loc[df_games['PIR']>=z11].copy()
     else:
