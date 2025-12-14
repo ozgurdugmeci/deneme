@@ -428,6 +428,9 @@ try:
     z11=ortalma-(sapma*1.5)
     df_games_last5= df_games.tail(5)
     df_games_last5=df_games_last5['PIR'].values.tolist()
+    cv=sapma/ortalma
+    cv=cv*100
+    cv=cd.round(0)
     if ortalma/sapma<2:
      df_games_est=df_games.loc[df_games['PIR']>=z11].copy()
     else:
@@ -454,10 +457,12 @@ try:
     dummy_puan.append(sapma)
     dummy_puan.append(ortalma)
     dummy_puan.append(flop)
+    dummy_puan.append(cv)
     dummy_puan.append(ortalma_estimation)
     dummy_puan.append(df_games_last5)
     dummy_puan.append(max_flop)
     dummy_puan.append(maxy)
+    
     df_hesap.append(dummy_puan)
     
     dummy_puan=[]
@@ -468,14 +473,14 @@ try:
     pass
   #df_hesap.sort_values(by=['PIR_Estimation'],ascending=False)
   df_hesap=pd.DataFrame(df_hesap) 
-  df_hesap.columns=['Player','Dakka_sd','Minute(Avrg)','PIR_sd','PIR(Avrg)','%Flop','PIR_Expected','Last5_Games','PIR_Flop','PIR_Max']
+  df_hesap.columns=['Player','Dakka_sd','Minute(Avrg)','PIR_sd','PIR(Avrg)','%Flop','cv','PIR_Expected','Last5_Games','PIR_Flop','PIR_Max']
   #df_hesap['PIR_Min']=df_hesap['PIR(Avrg)']-df_hesap['PIR_sd']
   #df_hesap['PIR_Max']=df_hesap['PIR(Avrg)']+df_hesap['PIR_sd']
   #df_hesap['PIR_Min']=df_hesap['PIR_Min'].astype(str)
   #df_hesap['PIR_Max']=df_hesap['PIR_Max'].astype(str)
 
 
-  df_hesap=df_hesap[['Player','Minute(Avrg)','PIR(Avrg)','%Flop','PIR_Expected','PIR_Flop','PIR_Max','Last5_Games']]
+  df_hesap=df_hesap[['Player','Minute(Avrg)','PIR(Avrg)','%Flop','cv','PIR_Expected','PIR_Flop','PIR_Max','Last5_Games']].copy()
   #df_hesap['Oran']= df_hesap['PIR(Avrg)']/df_hesap['PIR_sd']
   #df_hesap['Oran']=df_hesap['Oran'].round(2)
   df_hesap=df_hesap.sort_values(by='PIR_Expected', ascending=False)
