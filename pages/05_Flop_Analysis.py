@@ -9,6 +9,7 @@ import numpy as np
 st.set_page_config(page_title='Flop Analysis', page_icon="💪", layout="wide")
 
 st.header('Flop Analysis') 
+'hop'
 ktsy=0
 a=5
 dummy2=[]
