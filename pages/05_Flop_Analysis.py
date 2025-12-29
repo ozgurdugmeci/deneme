@@ -466,10 +466,8 @@ try:
     cv=sapma/ortalma
     cv=cv*1000
     cv=cv.round(0)
-    sutun= container.columns[0]
-    sutun
-    #container=container.loc[container['0']==played].copy()
-    #st.dataframe(container)
+    container=container.loc[container[container.columns[0]]==played].copy()
+    st.dataframe(container)
     st.stop()
     if ortalma/sapma<2:
      df_games_est=df_games.loc[df_games['PIR']>=z11].copy()
