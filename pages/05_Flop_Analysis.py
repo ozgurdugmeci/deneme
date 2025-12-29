@@ -468,6 +468,7 @@ try:
     cv=cv.round(0)
     
     container2=container.loc[container[container.columns[0]]==played].copy()
+    st.datafreame(container2)
     #container2=container2.values.tolist()[0]
     #len2=len(container2)
     #for ttt in range(played,len2):
