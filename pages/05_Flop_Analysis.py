@@ -8,6 +8,37 @@ import json
 st.set_page_config(page_title='Flop Analysis', page_icon="💪", layout="wide")
 
 st.header('Flop Analysis') 
+ktsy=0
+a=5
+dummy2=[]
+dummy=[]
+number=[]
+liste=[5]
+container=[]
+print('----------------------------------------------------')
+for i in range(2,40):
+ #print(i)
+ liste.append(a)
+ dummy.append(i)
+ #dummy.append(liste.copy())
+ 
+ liste_hesap=liste.copy()
+ #ortalama kaybetme
+ for ort in range(1,i):
+  liste_hesap[ort]=0
+  sapma= np.std(liste_hesap,ddof=0) 
+ 
+  ortalama=np.mean(liste_hesap)
+  
+  cv= sapma/ortalama
+  cv=cv.round(4)
+  dummy.append(cv)
+ container.append(dummy)
+ #print(container)
+ dummy=[] 
+st.dataframe(container)
+st.stop()
+
 #-------------------------------------
 #try: 
 counter=0
