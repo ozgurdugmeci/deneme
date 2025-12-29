@@ -39,8 +39,8 @@ for i in range(2,40):
  container.append(dummy)
  #print(container)
  dummy=[] 
-st.dataframe(container)
-st.stop()
+#st.dataframe(container)
+#st.stop()
 
 #-------------------------------------
 #try: 
