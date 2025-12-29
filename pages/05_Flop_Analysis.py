@@ -33,6 +33,7 @@ for i in range(2,40):
   
   cv= sapma/ortalama
   cv=cv.round(4)
+  cv=cv*1000
   dummy.append(cv)
  container.append(dummy)
  #print(container)
