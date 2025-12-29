@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import json
+import numpy as np
 
 st.set_page_config(page_title='Flop Analysis', page_icon="💪", layout="wide")
 
