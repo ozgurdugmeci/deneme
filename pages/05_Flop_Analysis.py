@@ -470,7 +470,7 @@ try:
     container2=container.loc[container[container.columns[0]]==played].copy()
     container2=container2.fillna('-')
     container2=container2.values.tolist()
-    container2=container2.remove("-")
+    container2.remove("-")
     container2=pd.DataFrame(container2)
     st.dataframe(container2)
     
