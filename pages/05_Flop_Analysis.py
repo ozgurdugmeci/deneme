@@ -8,7 +8,7 @@ import numpy as np
 
 st.set_page_config(page_title='Flop Analysis', page_icon="💪", layout="wide")
 
-st.header('Flop Analysis') 
+st.header('Flop Analysis--') 
 
 ktsy=0
 a=5
