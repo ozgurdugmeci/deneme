@@ -40,7 +40,7 @@ for i in range(2,40):
  container.append(dummy)
  #print(container)
  dummy=[] 
-container=DataFrame(container)
+container=pd.DataFrame(container)
 
 #-------------------------------------
 #try: 
