@@ -31,10 +31,10 @@ for i in range(2,40):
  
   ortalama=np.mean(liste_hesap)
   
-  cv= sapma/ortalama
-  cv=cv.round(4)
-  cv=cv*1000
-  dummy.append(cv)
+  cv2= sapma/ortalama
+  cv2=cv2.round(4)
+  cv2=cv2*1000
+  dummy.append(cv2)
  container.append(dummy)
  #print(container)
  dummy=[] 
