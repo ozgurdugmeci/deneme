@@ -41,7 +41,7 @@ for i in range(2,40):
  #print(container)
  dummy=[] 
 container=pd.DataFrame(container)
-
+container=container.fillna('-')
 #-------------------------------------
 #try: 
 counter=0
@@ -468,11 +468,11 @@ try:
     cv=cv.round(0)
     
     container2=container.loc[container[container.columns[0]]==played].copy()
-    container2=container2.fillna('-')
-    container2=container2.values.tolist()
-    #container2.remove("-")
-    #container2=pd.DataFrame(container2)
-    #st.dataframe(container2)
+    #container2=container2.values.tolist()[0]
+    #len2=len(container2)
+    #for ttt in range(played,len2):
+     #len3=len(container2)
+     #container2.pop(len3-1)
     
     if ortalma/sapma<2:
      df_games_est=df_games.loc[df_games['PIR']>=z11].copy()
