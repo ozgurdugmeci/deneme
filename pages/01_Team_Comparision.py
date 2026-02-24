@@ -10,8 +10,8 @@ import pandas as pd
 
 st.set_page_config(page_title='Team Comparison', page_icon="🏀", layout="wide",initial_sidebar_state ='collapsed')
 
-
-
+'Due to maintenance analysis will not be reachable.'
+st.stop()
 
 #-------------------------------------
 #try: 
