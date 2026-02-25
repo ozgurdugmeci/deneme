@@ -8,7 +8,7 @@ import plotly.express as px
 from streamlit_plotly_events import plotly_events
 
 st.set_page_config(page_title='Substitution Analysis', page_icon="📋", layout="wide")
-'Due to maintenance analysis will not be reachable.'
+'Due to maintenance analysis will not be accesible.'
 st.stop()
 #------------------------------------------------
 try: 
