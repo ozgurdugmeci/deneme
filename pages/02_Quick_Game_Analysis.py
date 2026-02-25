@@ -7,7 +7,7 @@ import json
 import plotly.express as px
 st.set_page_config(page_title='Game Analysis', page_icon="🥇", layout="wide")
 
-'Due to maintenance analysis will not be reachable.'
+'Due to maintenance analysis will not be accesible.'
 st.stop()
 #------------------------------------------------
 #try: 
