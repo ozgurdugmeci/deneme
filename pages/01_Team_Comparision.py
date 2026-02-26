@@ -80,14 +80,14 @@ if option !=None:
  resm=resm['images.crest'].values.tolist()
  with col1:
   st.image (resm[0],width=100)
+ 'Due to maintenance analysis will not be accessible.'
+ st.stop()
 
  df_parca= df_clubs.loc[df_clubs['name']==option].copy()
  df_parca = df_parca['url'].values.tolist()[0]
  df_parca= df_parca.replace('roster','games')
  df_parca=df_parca.replace('/','//')
  
- 'Due to maintenance analysis will not be accessible.'
- st.stop()
 	 
  #2 
  #sezon bilgisini al qq
