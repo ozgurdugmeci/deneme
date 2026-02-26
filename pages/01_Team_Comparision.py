@@ -77,7 +77,7 @@ if option !=None:
  
  #printo
  resm=df_clubs.loc[df_clubs['name']==option].copy()
- resm=resm['crest'].values.tolist()
+ resm=resm['images.crest'].values.tolist()
  with col1:
   st.image (resm[0],width=100)
 
