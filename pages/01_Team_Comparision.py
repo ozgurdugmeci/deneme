@@ -10,31 +10,38 @@ import pandas as pd
 
 st.set_page_config(page_title='Team Comparison', page_icon="🏀", layout="wide",initial_sidebar_state ='collapsed')
 
-'Due to maintenance analysis will not be accessible.'
-st.stop()
+df_clubs=[]
+df_clubs=pd.DataFrame(df_clubs)
+dummy_club=[]
+dummy_club=pd.DataFrame(dummy_club)
 
 #-------------------------------------
 #try: 
 counter=0
-linko='https://www.euroleaguebasketball.net//euroleague/teams//'
-#1
-#klüp bilgilerini al 
+linko='https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/E/seasons/E2025/clubs'
 
-
+# inspect structure
+# print(data.keys())
 page = requests.get(linko)
 
 soup = BeautifulSoup(page.content,"html.parser")
 
-kk = soup.find(id="__NEXT_DATA__" )
-
-for i in kk:
- soup=i
+'''for i in kk:
+ soup=i'''
+df_clubs=[]
+df_clubs=pd.DataFrame(df_clubs)
+dummy_club=[]
+dummy_club=pd.DataFrame(dummy_club)
 
 site_json=json.loads(soup.string)
+site_json=site_json['data'] #python list
 
-kk=site_json['props']['pageProps']['clubs']['clubs']
-df_clubs=pd.json_normalize(kk)
+#df_radar= pd.concat([df_team1, df_team2])
 
+for i in site_json:
+ dummy_club=pd.json_normalize(i)
+ df_clubs=pd.concat([df_clubs,dummy_club])
+ 
 try:
  euro_img='https://media-cdn.incrowdsports.com/23610a1b-1c2e-4d2a-8fe4-ac2f8e400632.svg'
  st.image(euro_img,width=120)
@@ -44,8 +51,6 @@ except:
 ' '
 ' ' 
 box1= df_clubs['name'].values.tolist()
-
-
 
 col1,col3,col2 = st.columns([3,6,3])
 
@@ -81,7 +86,9 @@ if option !=None:
  df_parca= df_parca.replace('roster','games')
  df_parca=df_parca.replace('/','//')
  
- 
+ 'Due to maintenance analysis will not be accessible.'
+ st.stop()
+	 
  #2 
  #sezon bilgisini al qq
  #fikstür bilgisini al
