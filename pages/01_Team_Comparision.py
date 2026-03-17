@@ -6,42 +6,23 @@ import pandas as pd
 import json
 import plotly.express as px
 import pandas as pd
+from euroleague_api.game_stats import GameStats as gs
+from euroleague_api.team_stats import TeamStats as ts
+from euroleague_api.standings import Standings as s
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
 st.set_page_config(page_title='Team Comparison', page_icon="🏀", layout="wide",initial_sidebar_state ='collapsed')
 
-df_clubs=[]
-df_clubs=pd.DataFrame(df_clubs)
-dummy_club=[]
-dummy_club=pd.DataFrame(dummy_club)
-
 #-------------------------------------
 #try: 
+df_stats=[]
+df_stats=pd.DataFrame(df_stats)
+df_stats2=[]
+df_stats2=pd.DataFrame(df_stats2)
 counter=0
-linko='https://feeds.incrowdsports.com/provider/euroleague-feeds/v2/competitions/E/seasons/E2025/clubs'
-
-# inspect structure
-# print(data.keys())
-page = requests.get(linko)
-
-soup = BeautifulSoup(page.content,"html.parser")
-
-'''for i in kk:
- soup=i'''
-df_clubs=[]
-df_clubs=pd.DataFrame(df_clubs)
-dummy_club=[]
-dummy_club=pd.DataFrame(dummy_club)
-
-site_json=json.loads(soup.string)
-site_json=site_json['data'] #python list
-
-#df_radar= pd.concat([df_team1, df_team2])
-
-for i in site_json:
- dummy_club=pd.json_normalize(i)
- df_clubs=pd.concat([df_clubs,dummy_club])
- 
+sezon=2025
 try:
  euro_img='https://media-cdn.incrowdsports.com/23610a1b-1c2e-4d2a-8fe4-ac2f8e400632.svg'
  st.image(euro_img,width=120)
@@ -50,7 +31,15 @@ except:
 #st.title('Productive Five') -------- ----
 ' '
 ' ' 
-box1= df_clubs['name'].values.tolist()
+standinga = s("E")
+df_clubs = standinga.get_standings(season= sezon, round_number= 1, endpoint= 'basicstandings')
+#print(df_clubs.columns)
+df_clubs= df_clubs[['club.name','club.editorialName','club.images.crest','club.tvCode','club.code']].copy()
+print(df_clubs)
+
+df_clubs=df_clubs.sort_values(by='club.name', ascending=True)
+
+box1= df_clubs['club.name'].values.tolist()
 
 col1,col3,col2 = st.columns([3,6,3])
 
@@ -72,195 +61,99 @@ if option !=None:
   
  printo= option + ' seçilen'
 
- takm1=df_clubs.loc[df_clubs['name']==option].copy() 
- takm1=takm1['tvCode'].values.tolist()[0]
+ takm1=df_clubs.loc[df_clubs['club.name']==option].copy() 
+ takm1=takm1['club.code'].values.tolist()[0]
  
  #printo
- resm=df_clubs.loc[df_clubs['name']==option].copy()
- resm=resm['images.crest'].values.tolist()
+ resm=df_clubs.loc[df_clubs['club.name']==option].copy()
+ resm=resm['club.images.crest'].values.tolist()
  with col1:
-  st.image (resm[0],width=100)
- 'Due to maintenance analysis will not be accessible.'
- st.stop()
-
- df_parca= df_clubs.loc[df_clubs['name']==option].copy()
- df_parca = df_parca['url'].values.tolist()[0]
- df_parca= df_parca.replace('roster','games')
- df_parca=df_parca.replace('/','//')
+  st.image(resm[0],width=100)
+ #---------Devam1
  
-	 
- #2 
- #sezon bilgisini al qq
- #fikstür bilgisini al
+ team_stats=ts("E")
+ game_stats = gs("E")
+ df_results_all=team_stats.get_gamecodes_season(season=sezon) # results
+ df_results1= df_results_all.loc[df_results_all['homecode']==takm1].copy()
+ df_results2= df_results_all.loc[df_results_all['awaycode']==takm1].copy()
+ df_results_team1= pd.concat([df_results1, df_results2])
  
+ df_results_team1=df_results_team1.sort_values(by='gameCode', ascending=False)
+ #df_results['yeni'] = df_results['hometeam'] + ' '+  df_results['homescore'] + ' - ' + df_results['awayteam']+ ' ' +  df_results['awayscore']  
+ #st.dataframe(df_results)
+ df_results_team1.loc[(df_results_team1['homecode']==takm1),'saha']= 'H' 
+ df_results_team1.loc[(df_results_team1['homecode']!=takm1),'saha']= 'A'
+ df_results_team1.loc[((df_results_team1['homecode']==takm1)& (df_results_team1['homescore']>df_results_team1['awayscore'])) ,'W/L']= '1'
+ df_results_team1.loc[((df_results_team1['homecode']==takm1)& (df_results_team1['homescore']<df_results_team1['awayscore'])) ,'W/L']= '0'
+ df_results_team1.loc[((df_results_team1['homecode']!=takm1)& (df_results_team1['homescore']>df_results_team1['awayscore'])) ,'W/L']= '0'
+ df_results_team1.loc[((df_results_team1['homecode']!=takm1)& (df_results_team1['homescore']<df_results_team1['awayscore'])) ,'W/L']= '1' 
+ df_results_team1.loc[(df_results_team1['saha']=='H'),'P+']= df_results_team1['homescore']  
+ df_results_team1.loc[(df_results_team1['saha']=='A'),'P+']= df_results_team1['awayscore']
  
- linko_sezon= 'https://www.euroleaguebasketball.net'+ df_parca + '?season=2023-24'	
+ df_results_team1.loc[(df_results_team1['saha']=='H'),'P-']= df_results_team1['awayscore']  
+ df_results_team1.loc[(df_results_team1['saha']=='A'),'P-']= df_results_team1['homescore']
+ #points_art= df_results_team1['P+'].sum()
+ #points_eks= df_results_team1['P-'].sum()
  
+ #st.dataframe(df_results_team1)
  
- page = requests.get(linko_sezon)
- 
- soup = BeautifulSoup(page.content,"html.parser")
- 
- kk = soup.find(id="__NEXT_DATA__" )
- 
- 
- for i in kk:
-  soup=i
- 
- site_json=json.loads(soup.string)
- 
- #dict_keys(['hero', 'results', 'seasons', 'clubCode', 'clubName', 'club'])
- #dict_keys(['featuredGame', 'results', 'upcomingGames'])
- 
- df_sezon= pd.json_normalize(site_json['props']['pageProps']['seasons'])
- 
- box2=df_sezon['text'].values.tolist()
- 
- #with col1:
- # option2 = st.selectbox(
- #    'Select the season',
- #    (box2), key='2')'''
- 
- df_team1=[]
- df_team1=pd.DataFrame(df_team1)
- df_team2=[]
- df_team2=pd.DataFrame(df_team2)
-
- linko_results= 'https://www.euroleaguebasketball.net'+ df_parca + '?season='+ str(box2[0])	
- 
- page = requests.get(linko_results)
- 
- soup = BeautifulSoup(page.content,"html.parser")
- 
- kk = soup.find(id="__NEXT_DATA__" )
- 
- for i in kk:
-  soup=i
- 
- site_json=json.loads(soup.string)
- 	
- 	
- df_results= pd.json_normalize(site_json['props']['pageProps']['results']['results'])
- df_results['home.score']= df_results['home.score'].astype(str)
- df_results['away.score'] = df_results['away.score'].astype(str)
- 
- 
- df_results['yeni'] = df_results['home.abbreviatedName'] + ' '+  df_results['home.score'] + ' - ' + df_results['away.abbreviatedName']+ ' ' +  df_results['away.score']  
- 
- #df_results['yeni'] = df_results['home.score']+ '-' +df_results['away.score']
- #df_results.loc[(df_results['home.name']== option),'yeni2'] = 'vs-> ' +df_results['away.name'] +' ' + df_results['yeni']
- #df_results.loc[(df_results['home.name']!= option),'yeni2'] = 'at-> ' + df_results['home.name'] + ' ' +df_results['yeni']
- #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
- box3= df_results['yeni'].values.tolist()
-
- #box3' ün son 5 sonucunu dök---------------------------------------
- #with col1:
- #box3
  deplasman=0 
  saha=0 
- uzunluk=len(box3)
+ uzunluk=len(df_results_team1)
  if value1> uzunluk:
   pass
  else:
   uzunluk=value1 
  away_win=0
  home_win=0
- for r in range(0,uzunluk):
+ df_results_team1= df_results_team1.head(uzunluk)
+ game_codes= df_results_team1['gameCode'].values.tolist()
+ durum= df_results_team1['W/L'].values.tolist()
+ saha= df_results_team1['saha'].values.tolist()
+ round= df_results_team1['Round'].values.tolist()
+ points_eks= df_results_team1['P-'].values.tolist()
+ mimle=0
+ #burdan devam--------------------------------------------------
   
-  #st.dataframe(df_results)
-  raw_game= df_results.loc[df_results['yeni']==box3[r]].copy() 
-  link_game = raw_game['url'].values.tolist()
-  #raw_game
-  #'results'
-  #link_game[0]	 
-  link_game = link_game[0]
-  link_game =link_game.replace('/','//')
-  link_game= 'https://www.euroleaguebasketball.net' + link_game 
-  page = requests.get(link_game)
+ #burda results teker teker analiz ediliyor.
+ for r in game_codes:
+  df2=game_stats.get_game_stats(season= sezon, game_code= r) #team stats 
+  #team stats 
   
-  soup = BeautifulSoup(page.content,"html.parser")
-  
-  nn = soup.find(id="__NEXT_DATA__" )
-  
-  #-------
-  for i in nn:
-   soup=i
-  #devamcddddddddddddddddddd ------------------------
-  site_json=json.loads(soup.string)
-  nn=site_json['props']
-  
-  nn=nn['pageProps']
-  
-  nn=nn['mappedData']
-  name1=nn['rawGameInfo']['home']['name']
-  name2=nn['rawGameInfo']['away']['name']
-  name11=nn['rawGameInfo']['home']['abbreviatedName']
-  name22=nn['rawGameInfo']['away']['abbreviatedName']
-  df_h=nn['rawGameInfo']['home']['stats']
-  df_a= nn['rawGameInfo']['away']['stats']
-  
-  
-  
-  #['code', 'name', 'abbreviatedName'] ----------- -----------
-  df_h=pd.json_normalize(df_h)
-  df_a=pd.json_normalize(df_a)
-
-  df_h['Team1'] = name1
-  df_h['Team'] = name11
-  df_a['Team1'] = name2
-  df_a['Team'] = name22
-  if option == name1:
-   #'home'
-   scorey=raw_game['away.score'].values.tolist()[0]
-   df_h['Points-']=scorey
-   df_team1= pd.concat([df_team1, df_h])
-   scorea=raw_game['home.score'].values.tolist()[0]
-   saha=saha+1
-   if int(scorea)> int(scorey):
-    home_win=home_win+1
-	  
+  if saha[mimle]== 'H':
+   df2=df2[['local.total.points','local.total.accuracyMade','local.total.accuracyAttempted','local.total.totalRebounds','local.total.assistances','local.total.turnovers']].copy()
+   df2.columns=['Points','Accuracy Made','Accuracy Attempted','Rebaunds','Assists','Turnovers']
+   df2['Points-']= points_eks[mimle]
+   df2['W/L']= durum[mimle]
+   df2['H/A']=saha[mimle]
+   df2['%Accuracy']=df2['Accuracy Made']/df2['Accuracy Attempted']
+   df2['Round']=round[mimle]   
   else:
-   #'away'
-   deplasman=deplasman+1
-   scorey=raw_game['home.score'].values.tolist()[0]
-   scorea=raw_game['away.score'].values.tolist()[0]
-   df_a['Points-']=scorey
-   df_team1= pd.concat([df_team1, df_a])    
-   if int(scorea)>int(scorey):
-     away_win=away_win+1
- top=saha+deplasman
- metin1= 'Home Games: ' + str(saha)
- metin2= 'Away Games: '  + str(deplasman)
- metin3= 'Home Wins: ' + str(home_win)
- metin4= 'Away Wins: ' + str(away_win)
- metin1= metin1 + ' , '+ metin3
- metin2= metin2 + ' , '+ metin4	
- with col1:
-  metin1  
-  metin2
- #if deplasman>0 :   
- #away_win=away_win/uzunluk
- #away_win=round(away_win,2)-------
-  
-  #away_win = "%" + str(away_win*100)
- #with col1:
- #'Away Wins%'
- #away_win
- #else:
- #with col1:
- #'Away Wins%'----------
- #'No away games.' 
- df_team1['All']='All'
- df_team1= df_team1[['points','Points-','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
- df_team1.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
- df_team1['Points-']=df_team1['Points-'].astype(float)
- #st.dataframe(df_team1)
-
- df_team1['All'] = 'All'
+   df2=df2[['road.total.points','road.total.accuracyMade','road.total.accuracyAttempted','road.total.totalRebounds','road.total.assistances','road.total.turnovers']].copy()   
+   df2.columns=['Points','Accuracy Made','Accuracy Attempted','Rebaunds','Assists','Turnovers']
+   df2['Points-']= points_eks[mimle]
+   df2['W/L']= durum[mimle]
+   df2['H/A']=saha[mimle]
+   df2['%Accuracy']=df2['Accuracy Made']/df2['Accuracy Attempted']
+   df2['Round']=round[mimle]
+   
+  df_stats= pd.concat([df2,df_stats])
+  mimle=mimle+1
  
- df_team1 = pd.pivot_table(df_team1, values=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt'], index=['All'] ,aggfunc="sum") 
+
+ df_stats.loc[(df_stats['W/L']=='1'),'-W/L-']='W'
+ df_stats.loc[(df_stats['W/L']=='0'),'-W/L-']='L'
+ df_team1= df_stats.copy()
+ df_team1['All']='All'
+ df_team1 = pd.pivot_table(df_team1, values=['Points','Points-','Accuracy Attempted','Rebaunds','Assists','Turnovers'], index=['All'] ,aggfunc="sum") 
  df_team1 = df_team1.reset_index()                #index to columns ------------------  -------------------------------
  df_team1.drop(['All'], inplace=True, axis=1)
+ 
+ df_team1= df_team1[['Points','Points-','Assists','Rebaunds','Turnovers','Accuracy Attempted']].copy()
+ df_team1.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
+ #st.dataframe(df_team1)
+ 
+ 
  
  uzunluk2=len(df_team1.columns) 
  
@@ -268,228 +161,112 @@ if option !=None:
    
   df_team1[df_team1.columns[i]]= df_team1[df_team1.columns[i]]/uzunluk
   df_team1[df_team1.columns[i]]=df_team1[df_team1.columns[i]].round(0)
-
- 
- 
+ #st.dataframe(df_stats)
  #st.dataframe(df_team1)
  
-# column2 starts-------------------------------
-
-#try: 
-counter=0
-
-
-#st.title('Productive Five')
-' '
-' ' 
-box1= df_clubs['name'].values.tolist()
-
-
-
-#col1
-
+ 
 with col2:
  optionto = st.selectbox(
-  'Select the team',
-  (box1), key='2',index=None)
+    'Select the team',
+    (box1), key='2',index=None)
 
 
-	
+#------	
 if optionto !=None:
- 
+  
  printo= optionto + ' seçilen'
+
+ takm2=df_clubs.loc[df_clubs['club.name']==optionto].copy() 
+ takm2=takm2['club.code'].values.tolist()[0]
+ 
  #printo
- 
- takm2=df_clubs.loc[df_clubs['name']==optionto].copy() 
- takm2=takm2['tvCode'].values.tolist()[0]
-
- 
- resm=df_clubs.loc[df_clubs['name']==optionto].copy()
- resm=resm['crest'].values.tolist()
+ resm=df_clubs.loc[df_clubs['club.name']==optionto].copy()
+ resm=resm['club.images.crest'].values.tolist()
+ #devam -----------------------------------------
  with col2:
-  st.image (resm[0],width=100)
-
+  st.image(resm[0],width=100)
+ #---------Devam1
+ team_stats=ts("E")
+ game_stats = gs("E")
+ df_results_all=team_stats.get_gamecodes_season(season=sezon) # results
+ df_results1= df_results_all.loc[df_results_all['homecode']==takm2].copy()
+ df_results2= df_results_all.loc[df_results_all['awaycode']==takm2].copy()
+ df_results_team2= pd.concat([df_results1, df_results2])
  
- df_parca= df_clubs.loc[df_clubs['name']==optionto].copy()
- df_parca = df_parca['url'].values.tolist()[0]
- df_parca= df_parca.replace('roster','games')
- df_parca=df_parca.replace('/','//')
+ df_results_team2=df_results_team2.sort_values(by='gameCode', ascending=False)
+ #df_results['yeni'] = df_results['hometeam'] + ' '+  df_results['homescore'] + ' - ' + df_results['awayteam']+ ' ' +  df_results['awayscore']  
+ #st.dataframe(df_results)
+ df_results_team2.loc[(df_results_team2['homecode']==takm2),'saha']= 'H' 
+ df_results_team2.loc[(df_results_team2['homecode']!=takm2),'saha']= 'A'
+ df_results_team2.loc[((df_results_team2['homecode']==takm2)& (df_results_team2['homescore']>df_results_team2['awayscore'])) ,'W/L']= '1'
+ df_results_team2.loc[((df_results_team2['homecode']==takm2)& (df_results_team2['homescore']<df_results_team2['awayscore'])) ,'W/L']= '0'
+ df_results_team2.loc[((df_results_team2['homecode']!=takm2)& (df_results_team2['homescore']>df_results_team2['awayscore'])) ,'W/L']= '0'
+ df_results_team2.loc[((df_results_team2['homecode']!=takm2)& (df_results_team2['homescore']<df_results_team2['awayscore'])) ,'W/L']= '1' 
+ df_results_team2.loc[(df_results_team2['saha']=='H'),'P+']= df_results_team2['homescore']  
+ df_results_team2.loc[(df_results_team2['saha']=='A'),'P+']= df_results_team2['awayscore']
  
+ df_results_team2.loc[(df_results_team2['saha']=='H'),'P-']= df_results_team2['awayscore']  
+ df_results_team2.loc[(df_results_team2['saha']=='A'),'P-']= df_results_team2['homescore']
  
- #2 
- #sezon bilgisini al qq
- #fikstür bilgisini al
- 
- 
- linko_sezon= 'https://www.euroleaguebasketball.net'+ df_parca + '?season=2023-24'	
- 
- 
- page = requests.get(linko_sezon)
- 
- soup = BeautifulSoup(page.content,"html.parser")
- 
- kk = soup.find(id="__NEXT_DATA__" )
- 
- 
- for i in kk:
-  soup=i
- 
- site_json=json.loads(soup.string)
- 
- #dict_keys(['hero', 'results', 'seasons', 'clubCode', 'clubName', 'club'])
- #dict_keys(['featuredGame', 'results', 'upcomingGames'])
- 
- df_sezon= pd.json_normalize(site_json['props']['pageProps']['seasons'])
- 
- box2=df_sezon['text'].values.tolist()
- 
- #with col1:
- # option2 = st.selectbox(
- #    'Select the season',
- #    (box2), key='2')'''
- 
-
-
- linko_results= 'https://www.euroleaguebasketball.net'+ df_parca + '?season='+ str(box2[0])	
- 
- page = requests.get(linko_results)
- 
- soup = BeautifulSoup(page.content,"html.parser")
- 
- kk = soup.find(id="__NEXT_DATA__" )
- 
- for i in kk:
-  soup=i
- 
- site_json=json.loads(soup.string)
- 	
- 	
- df_results= pd.json_normalize(site_json['props']['pageProps']['results']['results'])
- df_results['home.score']= df_results['home.score'].astype(str)
- df_results['away.score'] = df_results['away.score'].astype(str)
- 
- 
- df_results['yeni'] = df_results['home.abbreviatedName'] + ' '+  df_results['home.score'] + ' - ' + df_results['away.abbreviatedName']+ ' ' +  df_results['away.score']  
- 
- #df_results['yeni'] = df_results['home.score']+ '-' +df_results['away.score']
- #df_results.loc[(df_results['home.name']== option),'yeni2'] = 'vs-> ' +df_results['away.name'] +' ' + df_results['yeni']
- #df_results.loc[(df_results['home.name']!= option),'yeni2'] = 'at-> ' + df_results['home.name'] + ' ' +df_results['yeni']
- #df_results['yeni'] = df_results['yeni2']+ ' ' +df_results['away.score']
- box3= df_results['yeni'].values.tolist()
-
- #col1 #box3' ün son 5 sonucunu dök-----------------------------------------------------
- #with col2:
- #box3
- deplasman=0   
- saha=0
- uzunluk=len(box3)
- away_win=0
- home_win=0
+ #st.dataframe(df_results_team2)
+ #df_results_team1
+ deplasman=0 
+ saha=0 
+ uzunluk=len(df_results_team2)
  if value1> uzunluk:
   pass
  else:
   uzunluk=value1 
- 
- for r in range(0,uzunluk):
+ away_win=0
+ home_win=0
+ df_results_team2= df_results_team2.head(uzunluk)
+ game_codes= df_results_team2['gameCode'].values.tolist()
+ durum= df_results_team2['W/L'].values.tolist()
+ saha= df_results_team2['saha'].values.tolist()
+ round= df_results_team2['Round'].values.tolist()
+ points_eks=df_results_team2['P-'].values.tolist()
+ mimle=0
+ #burdan devam--------------------------------------------------
   
-  #st.dataframe(df_results)
-  raw_game= df_results.loc[df_results['yeni']==box3[r]].copy() 
-  link_game = raw_game['url'].values.tolist()
-  #raw_game
-  #'results'
-  #link_game[0]	 
-  link_game = link_game[0]
-  link_game =link_game.replace('/','//')
-  link_game= 'https://www.euroleaguebasketball.net' + link_game 
-  page = requests.get(link_game)
+ #burda results teker teker analiz ediliyor.
+ for r in game_codes:
+  df2=game_stats.get_game_stats(season= sezon, game_code= r) #team stats 
+  #team stats 
   
-  soup = BeautifulSoup(page.content,"html.parser")
-  
-  nn = soup.find(id="__NEXT_DATA__" )
-  
-  #-------
-  for i in nn:
-   soup=i
-  #devamcddddddddddddddddddd ------------------------
-  site_json=json.loads(soup.string)
-  nn=site_json['props']
-  
-  nn=nn['pageProps']
-  
-  nn=nn['mappedData']
-  name1=nn['rawGameInfo']['home']['name']
-  name2=nn['rawGameInfo']['away']['name']
-  name11=nn['rawGameInfo']['home']['abbreviatedName']
-  name22=nn['rawGameInfo']['away']['abbreviatedName']
-  df_h=nn['rawGameInfo']['home']['stats']
-  df_a= nn['rawGameInfo']['away']['stats']
-  
-  
-  
-  #['code', 'name', 'abbreviatedName'] ----------- -----------
-  df_h=pd.json_normalize(df_h)
-  df_a=pd.json_normalize(df_a)
-
-  df_h['Team1'] = name1
-  df_h['Team'] = name11
-  df_a['Team1'] = name2
-  df_a['Team'] = name22
-  if optionto == name1:
-   #'home'
-   scorey=raw_game['away.score'].values.tolist()[0]
-   df_h['Points-']=scorey
-   df_team2= pd.concat([df_team2, df_h])
-   scorea=raw_game['home.score'].values.tolist()[0]
-   saha=saha+1
-   if int(scorea)> int(scorey):
-     home_win=home_win+1
-	 
-  #df_team1 
+  if saha[mimle]== 'H':
+   df2=df2[['local.total.points','local.total.accuracyMade','local.total.accuracyAttempted','local.total.totalRebounds','local.total.assistances','local.total.turnovers']].copy()
+   df2.columns=['Points','Accuracy Made','Accuracy Attempted','Rebaunds','Assists','Turnovers']
+   df2['Points-']= points_eks[mimle]
+   df2['W/L']= durum[mimle]
+   df2['H/A']=saha[mimle]
+   df2['%Accuracy']=df2['Accuracy Made']/df2['Accuracy Attempted']
+   df2['Round']=round[mimle]   
   else:
-   #'away'-------------------------
-   deplasman=deplasman+1
-   scorey=raw_game['home.score'].values.tolist()[0]
-   scorea=raw_game['away.score'].values.tolist()[0]
-   df_a['Points-']=scorey
-   df_team2= pd.concat([df_team2, df_a])    
-   if int(scorea)>int(scorey):
-     away_win=away_win+1
+   df2=df2[['road.total.points','road.total.accuracyMade','road.total.accuracyAttempted','road.total.totalRebounds','road.total.assistances','road.total.turnovers']].copy()   
+   df2.columns=['Points','Accuracy Made','Accuracy Attempted','Rebaunds','Assists','Turnovers']
+   df2['Points-']= points_eks[mimle]
+   df2['W/L']= durum[mimle]
+   df2['H/A']=saha[mimle]
+   df2['%Accuracy']=df2['Accuracy Made']/df2['Accuracy Attempted']
+   df2['Round']=round[mimle]
+   
+  df_stats2= pd.concat([df2,df_stats2])
+  mimle=mimle+1
  
- top=saha+deplasman
- metin1= 'Home Games: ' + str(saha)
- metin2= 'Away Games: '  + str(deplasman)
- metin3= 'Home Wins: ' + str(home_win)
- metin4= 'Away Wins: ' + str(away_win)
- metin1= metin1 + ' , '+ metin3
- metin2= metin2 + ' , '+ metin4		
- with col2: 
-  metin1
-  metin2
+ df_stats2.loc[(df_stats2['W/L']=='1'),'-W/L-']='W'
+ df_stats2.loc[(df_stats2['W/L']=='0'),'-W/L-']='L'
 
- #if deplasman>0 :
- #away_win=away_win/uzunluk
- #away_win=round(away_win,2) 
-  
-  
-  #away_win = "%" + str(away_win*100)
-  #with col2:
-  #'Away Wins%'
-  #away_win
- #else:
- #with col2:
- #'Away Wins%'
- #'No away games.' 
+ df_team2= df_stats2.copy()
  df_team2['All']='All'
- df_team2= df_team2[['points','Points-','assists','totalRebounds','turnovers','accuracyAttempted']].copy()
- df_team2.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
- df_team2['Points-']=df_team2['Points-'].astype(float)
- #st.dataframe(df_team2)
-
- df_team2['All'] = 'All'
- 
- df_team2 = pd.pivot_table(df_team2, values=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt'], index=['All'] ,aggfunc="sum") 
- df_team2 = df_team2.reset_index()                #index to columns ----------
+ df_team2 = pd.pivot_table(df_team2, values=['Points','Points-','Accuracy Attempted','Rebaunds','Assists','Turnovers'], index=['All'] ,aggfunc="sum") 
+ df_team2 = df_team2.reset_index()                #index to columns ------------------  -------------------------------
  df_team2.drop(['All'], inplace=True, axis=1)
+ 
+ df_team2= df_team2[['Points','Points-','Assists','Rebaunds','Turnovers','Accuracy Attempted']].copy()
+ df_team2.columns=['Points','Points-','Assists','Rebounds','Turnovers','ScoreAttempt']
+ #st.dataframe(df_team1)
+ 
+ 
  
  uzunluk2=len(df_team2.columns) 
  
@@ -497,6 +274,8 @@ if optionto !=None:
    
   df_team2[df_team2.columns[i]]= df_team2[df_team2.columns[i]]/uzunluk
   df_team2[df_team2.columns[i]]=df_team2[df_team2.columns[i]].round(0)
+ #st.dataframe(df_stats2)
+ #st.dataframe(df_team2)
 
 if option != None and optionto != None :
  df_team1_orj= df_team1.copy()
@@ -557,6 +336,9 @@ if option != None and optionto != None :
  with col3:
   st.subheader('Comparison of '+printox)
 
+ 
+ 
+ 
  fig = px.line_polar(df_radar, r="Values",
                     theta="Stats",
                     color="Teams",
@@ -572,16 +354,25 @@ if option != None and optionto != None :
                   )
 
  fig.update_layout(
-     paper_bgcolor="#494b5a",
-     legend=dict(font=dict(size=12, color="white")),
-     font=dict(size=12, color="white"),
-     width=560,  # Set the width of the graph
-     height=500)  # Set the height of the graph)
+    paper_bgcolor="#494b5a",
+    legend=dict(
+        font=dict(size=8, color="white"),
+        itemsizing='constant',
+        itemwidth=30,
+        tracegroupgap=0,
+        orientation="h",          # Horizontal layout (saves vertical space)
+        x=0.5,                    # Center it horizontally
+        xanchor="center",         # Anchor point for x
+        y=-0.1,                   # Push it below the chart
+        yanchor="top"             # Anchor point for y
+    ),
+    font=dict(size=12, color="white"),
+    width=480,
+    height=320)
  
  with  col3:  
   config = {'staticPlot': True}
   st.plotly_chart(fig,config=config)
-
 takip = """
 <!-- Default Statcounter code for Euro_stats_compare
 https://euroleaguestats.streamlit.app/ -->
@@ -602,3 +393,4 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->"""
 #st.markdown(takip, unsafe_allow_html=True)  
 components.html(takip,width=200, height=200)  
+ 
